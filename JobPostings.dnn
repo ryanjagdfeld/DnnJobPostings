@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dotnetnuke type="Package" version="6.0">
+  <packages>
+    <package name="YogIt.Modules.JobPostings" type="Module" version="01.00.02">
+      <friendlyName>Job Postings Module</friendlyName>
+      <description>
+        <![CDATA[<p>Simple job posting DNN modules extension. </p>]]>
+      </description>
+      <iconFile>DesktopModules/MVC/YogIt.Modules.JobPostings/Images/logo.png</iconFile>
+      <owner>
+        <name>Ryan Jagdfeld</name>
+        <organization>YogIT</organization>
+        <url><![CDATA[<a href="www.yogit.com" target="_blank">www.yogit.com</a>]]></url>
+        <email><![CDATA[<a href="mailto:support@yogit.com" target="_blank">support@yogit.com</a>]]></email>
+      </owner>
+      <license src="License.txt" />
+      <releaseNotes src="ReleaseNotes.txt" />
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="coreversion">09.06.01</dependency>
+      </dependencies>
+      <components>
+        <component type="Script">
+          <scripts>
+            <basePath>DesktopModules\MVC\YogIt.Modules.JobPostings</basePath>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>01.00.00.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+            <script type="Install">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>01.00.02.SqlDataProvider</name>
+              <version>01.00.02</version>
+            </script>
+            <script type="UnInstall">
+              <path>Providers\DataProviders\SqlDataProvider</path>
+              <name>Uninstall.SqlDataProvider</name>
+              <version>01.00.00</version>
+            </script>
+          </scripts>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>JobPostings Module</moduleName>
+            <foldername>YogIt.Modules.JobPostings</foldername>
+            <businessControllerClass>YogIt.Modules.JobPostings.Components.JobPostingController, YogIt.Modules.JobPostings</businessControllerClass>
+            <supportedFeatures />
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>JobPostings Module</friendlyName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>YogIt.Modules.JobPostings.Controllers/JobPosting/Index.mvc</controlSrc>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>YogIt.Modules.JobPostings.Controllers/JobPosting/Edit.mvc</controlSrc>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>Edit JobPostings Content</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                    <supportsPopUps>False</supportsPopUps>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+          <eventMessage>
+            <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+            <processorCommand>UpgradeModule</processorCommand>
+            <attributes>
+              <businessControllerClass>YogIt.Modules.JobPostings.Components.JobPostingController, YogIt.Modules.JobPostings</businessControllerClass>
+              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+              <upgradeVersionsList>01.00.00</upgradeVersionsList>
+            </attributes>
+          </eventMessage>
+        </component>
+
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <name>YogIt.Modules.JobPostings.dll</name>
+              <path>bin</path>
+              <version>01.00.00</version>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/MVC/YogIt.Modules.JobPostings</basePath>
+            <resourceFile>
+              <name>Resources.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

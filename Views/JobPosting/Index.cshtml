@@ -1,0 +1,70 @@
+@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<YogIt.Modules.JobPostings.Models.FilterByLocation>
+
+@using DotNetNuke.Web.Mvc.Helpers
+@using System.Linq;
+@using DotNetNuke.Web.Client.ClientResourceManagement
+
+@{
+    var moduleId = Dnn.ModuleContext.ModuleId;
+    ClientResourceManager.RegisterStyleSheet(Dnn.DnnPage, "~/DesktopModules/MVC/YogIt.Modules.JobPostings/module.css");
+}
+@if (Dnn.ModuleContext.IsEditable)
+{
+    <a class="btn btn-default btn-primary" href="@Url.Action("Edit", "JobPosting", new { ctl = "Edit" })">@Dnn.LocalizeString("AddItem")</a>
+}
+<div id="Items-@Dnn.ModuleContext.ModuleId" class="posting">
+    <div class="row form-group">
+        <label for="location" class="col-sm-2 col-form-label form-label"><strong>@Dnn.LocalizeString("lblLocation")</strong></label>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(f => f.Locations, Model.Locations, Dnn.LocalizeString("FilterByLocation"), new { @class = "form-control", @id = "locations" })
+            @Html.TextBoxFor(f => f.SelectedLocation, new { @class = "d-none", @id = "selectedLocation" })
+
+        </div>
+    </div>
+
+    @if (Model.Data == null || !Model.Data.Any())
+    {
+        <p>@Dnn.LocalizeString("NoItems")</p>
+    }
+    else
+    {
+        foreach (var item in Model.Data)
+        {
+            <div class="row @((item.ExpriationDate == null) || (item.ExpriationDate > DateTime.Now) || Dnn.ModuleContext.IsEditable?"":"d-none")">
+                <div class="col-12">
+                    <h4>@item.Title</h4>
+                    <p>@item.ShortDescription</p>
+                    <div class="d-flex justify-content-end">
+                        <div class="btn-group" role="group" aria-label="Job Posting Options">
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="@string.Format("#collapse{0}", item.JobPostingId)" aria-expanded="false" aria-controls="@string.Format("collapse{0}", item.JobPostingId)">
+                                @Dnn.LocalizeString("ViewDetails")
+                            </button>
+                            <a class="btn btn-primary" href="/Careers/Online-Job-Application">@Dnn.LocalizeString("ApplyNow")</a>
+                            @if (Dnn.ModuleContext.IsEditable)
+                            {
+                                <a class="btn btn-default btn-primary" href="@Url.Action("Edit", "JobPosting", new { ctl = "Edit", itemId = item.JobPostingId })">@Html.Raw(Dnn.LocalizeString("EditItem"))</a>
+                                <a class="btn btn-default btn-warning btn-delete" href="@Url.Action("Delete", "JobPosting", new { itemId = item.JobPostingId })">@Html.Raw(Dnn.LocalizeString("DeleteItem"))</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse col-12" id="@string.Format("collapse{0}", item.JobPostingId)">
+                    @Html.Raw(item.Description)
+                    <div class="text-center"><a class="btn btn-lg btn-primary" href="/Careers/Online-Job-Application">@Dnn.LocalizeString("ApplyNow")</a></div>
+                </div>
+                <hr />
+            </div>
+
+            <div class="dnnClear"></div>
+        }
+    }
+</div>
+<script type="text/javascript">
+    $(document).on("click", ".btn-delete", function () {
+        return confirm('@Dnn.LocalizeString("DeleteConfirm")');
+    });
+    $(document).on("change", "#locations", function () {
+        $("#selectedLocation").val($("#locations").val());
+        this.form.submit();
+    });
+</script>

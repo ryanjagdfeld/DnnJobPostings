@@ -1,0 +1,17 @@
+/*
+
+UNINSTALL SQL PROVIDER SCRIPT
+
+JobPostings Extension for DNN
+
+*/
+
+IF NOT OBJECT_ID('{databaseOwner}[{objectQualifier}yogit_JobPostings]') IS NULL
+    DROP TABLE {databaseOwner}[{objectQualifier}yogit_JobPostings];
+GO
+
+/*
+
+END OF FILE
+
+*/

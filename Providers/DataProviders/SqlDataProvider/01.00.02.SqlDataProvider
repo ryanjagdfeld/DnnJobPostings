@@ -1,0 +1,23 @@
+/*
+
+INSTALL SQL PROVIDER SCRIPT
+
+JobPostings Extension for DNN
+
+01.00.02
+
+Release Notes:
+ - Remove JobType and Pay fields
+
+*/
+IF (SELECT COLUMNPROPERTY( OBJECT_ID(N'{databaseOwner}[{objectQualifier}yogit_JobPostings]'),'JobType','Pay')) IS NOT NULL   
+	ALTER TABLE {databaseOwner}[{objectQualifier}yogit_JobPostings] 
+		DROP COLUMN [JobType],
+					[Pay]
+GO
+
+/*
+
+END OF FILE
+
+*/

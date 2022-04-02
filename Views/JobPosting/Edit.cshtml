@@ -1,0 +1,68 @@
+@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<YogIt.Modules.JobPostings.Models.JobPostingInfo>
+
+@using DotNetNuke.Web.Client.ClientResourceManagement
+@using DotNetNuke.Web.Mvc.Helpers
+@using DotNetNuke.Framework.JavaScriptLibraries
+
+@{
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "~/DesktopModules/MVC/YogIt.Modules.JobPostings/Resources/tinymce/tinymce.min.js", 100);
+    ClientResourceManager.RegisterStyleSheet(Dnn.DnnPage, "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css", 100);
+    ClientResourceManager.RegisterScript(Dnn.DnnPage, "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js", 100);
+
+    JavaScript.RequestRegistration(CommonJs.jQueryUI);
+
+}
+
+<div id="Item-@Dnn.ModuleContext.ModuleId">
+    <div class="form">
+        <h2>
+            @Dnn.LocalizeString("EditJobPosting")
+        </h2>
+        <fieldset>
+            <div class="form-group @(Html.ViewData.ModelState.IsValidField("Title") ? null : "has-error" )">
+                <label for="title">@Dnn.LocalizeString("lblTitle")</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, String.Empty, new { @class = "text-danger field-validation-error" })
+            </div>
+            <div class="form-group">
+                <label for="shortDescription">@Dnn.LocalizeString("lblShortDescription")</label>
+                @Html.TextAreaFor(m => m.ShortDescription, new { @class = "form-control", @rows = 5 })
+            </div>
+            <div class="form-group">
+                <label for="description">@Dnn.LocalizeString("lblDescription")</label>
+                @Html.TextArea("description", Model.Description, new { @class = "form-control", @rows = "8", @id = "decription", @name = "description" })
+            </div>
+            <div class="form-group">
+                <label for="location">@Dnn.LocalizeString("lblLocation")</label>
+                @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="expiration">@Dnn.LocalizeString("lblExpiration")</label>
+                @Html.TextBoxFor(m => m.ExpriationDate, new { @class = "form-control w-25", @id = "expiration" })
+            </div>
+            @Html.HiddenFor(m => m.JobPostingId)
+            @Html.HiddenFor(m => m.ModuleId)
+            @Html.HiddenFor(m => m.CreatedByUserId)
+            @Html.HiddenFor(m => m.CreatedOnDate)
+        </fieldset>
+    </div>
+    <button type="submit" class="dnnPrimaryAction">@Dnn.LocalizeString("Submit")</button>
+    <a id="cancelEdit" href="@Url.Action("Index", "JobPosting")" class="dnnSecondaryAction">@Dnn.LocalizeString("Cancel")</a>
+</div>
+
+<script>      
+    $(function () { 
+
+        tinymce.init({
+            selector: '#decription',
+            height: 300,
+            plugins: [
+                'link lists searchreplace wordcount code table paste'
+            ],
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link',
+        });
+
+        $('#expiration').datepicker(); 
+    });
+</script>

@@ -1,0 +1,49 @@
+/*
+
+INSTALL SQL PROVIDER SCRIPT
+
+JobPostings Extension for DNN
+
+Release Notes:
+ - This script adds the intial table, indexes and contraints
+
+*/
+
+IF NOT OBJECT_ID('{databaseOwner}[{objectQualifier}yogit_JobPostings]') IS NULL
+    DROP TABLE {databaseOwner}[{objectQualifier}yogit_JobPostings];
+GO
+
+CREATE TABLE {databaseOwner}[{objectQualifier}yogit_JobPostings] (
+    [JobPostingId] INT IDENTITY(1,1) 
+        CONSTRAINT [PK_{objectQualifier}yogit_JobPosting] PRIMARY KEY CLUSTERED, 
+    [ModuleId] INT NOT NULL 
+        CONSTRAINT [FK_{objectQualifier}yogit_JobPosting_ModuleId] FOREIGN KEY 
+        REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleId]) ON DELETE CASCADE, 
+    [Title] NVARCHAR(100) NOT NULL, 
+    [ShortDescription] NVARCHAR(1000) NULL, 
+    [Description] NVARCHAR(MAX) NOT NULL, 
+    [Location] NVARCHAR(100) NULL,
+    [JobType] NVARCHAR(100) NULL,
+    [Pay] NVARCHAR(100) NULL,
+    [ExpriationDate] DATETIME NULL,
+    [CreatedOnDate] DATETIME NOT NULL, 
+    [CreatedByUserId] INT NOT NULL, 
+    [LastUpdatedOnDate] DATETIME NOT NULL, 
+    [LastUpdatedByUserId] INT NOT NULL
+);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}yogit_JobPosting_ModuleId] ON {databaseOwner}[{objectQualifier}yogit_JobPostings] ([ModuleId]);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}yogit_JobPosting_ItemId_ModuleId] ON {databaseOwner}[{objectQualifier}yogit_JobPostings] ([JobPostingId],[ModuleId]);
+GO
+
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}yogit_JobPosting_CreatedByUser] ON {databaseOwner}[{objectQualifier}yogit_JobPostings] ([CreatedByUserId]);
+GO
+
+/*
+
+END OF FILE
+
+*/

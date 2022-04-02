@@ -1,0 +1,17 @@
+
+<h2>JobPostings Modules Extension for DNN</h2>
+<p>Version 01.00.02</p>
+<ul>
+	<li>Removed organizational specific fields</li>
+</ul>
+<p>Version 01.00.01</p>
+<ul>
+	<li>Added Experation Date</li>
+</ul>
+<p>Version 01.00.00</p>
+<ul>
+	<li>Create a job posting</li>
+	<li>List/Display job postings</li>
+	<li>Update job posting</li>
+	<li>Delete job posting</li>
+</ul>
