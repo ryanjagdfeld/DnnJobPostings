@@ -17,7 +17,7 @@
         <label for="location" class="col-sm-2 col-form-label form-label"><strong>@Dnn.LocalizeString("lblLocation")</strong></label>
         <div class="col-sm-4">
             @Html.DropDownListFor(f => f.Locations, Model.Locations, Dnn.LocalizeString("FilterByLocation"), new { @class = "form-control", @id = "locations" })
-            @Html.TextBoxFor(f => f.SelectedLocation, new { @class = "d-none", @id = "selectedLocation" })
+            @Html.HiddenFor(f => f.SelectedLocation, new { @class = "d-none", @id = "selectedLocation" })
 
         </div>
     </div>
