@@ -5,7 +5,7 @@ Simple DNN Job Postings Module Extension
 This Module is an example for extending DNN (formerly DotNetNuke).
 
 ## Development Setup
-To clone this repository, first setup the scaffolding.  It uses @UpendoVentures yeoman generator-upendodnn.  To run it, install yeoman `npm install -g yo`. Then install Yarn `npm install -g yarn`. And finally, install the generator `npm install -g generator-upendodnn`. 
+To clone this repository, first setup the scaffolding.  It uses [@UpendoVentures](https://github.com/UpendoVentures) yeoman generator-upendodnn.  To run it, install yeoman `npm install -g yo`. Then install Yarn `npm install -g yarn`. And finally, install the generator `npm install -g generator-upendodnn`. 
 
 Generate the scaffold in the a folder with `yo upendodnn`. Select Solution Structure from the list and answer the questions.  Once complete, go to the Modules folder and clone this repo there `git clone https://github.com/yog-it/DnnJobPostings.git`. Optionally install the latest version of DNN into the Website folder of the scaffold. 
 
